@@ -14,15 +14,18 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GymManagement.Infrastructure", "src\GymManagement.Infrastructure\GymManagement.Infrastructure.csproj", "{F4773E2F-80CC-47B0-BD62-A87F7A7093B3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "requests", "requests", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
-	ProjectSection(SolutionItems) = preProject
-		requests\Subscriptions\CreateSubscription.http = requests\Subscriptions\CreateSubscription.http
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GymManagement.Contracts", "src\GymManagement.Contracts\GymManagement.Contracts.csproj", "{9952ACC2-7203-49DA-B11B-B04842F5B8A3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Subscriptions", "Subscriptions", "{428A88E6-7C3E-4154-A030-93F3646F083B}"
+	ProjectSection(SolutionItems) = preProject
+		requests\Subscriptions\CreateSubscription.http = requests\Subscriptions\CreateSubscription.http
+		GetSubscription.http = GetSubscription.http
 	EndProjectSection
 EndProject
 Global
@@ -105,6 +108,7 @@ Global
 		{D4C58F6F-A9CE-4A98-8DA8-CF21A34F815D} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{F4773E2F-80CC-47B0-BD62-A87F7A7093B3} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{9952ACC2-7203-49DA-B11B-B04842F5B8A3} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
+		{428A88E6-7C3E-4154-A030-93F3646F083B} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {86962154-F2E4-4BC9-B6C3-B8216ED9F571}

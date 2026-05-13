@@ -1,5 +1,8 @@
-﻿using GymManagement.Application.Commands.CreateSubscription;
+﻿using ErrorOr;
+using GymManagement.Application.Subscriptions.Commands.CreateSubscription;
+using GymManagement.Application.Subscriptions.Queries.GetSubscription;
 using GymManagement.Contracts.Subscriptions;
+using GymManagement.Domain.Subscriptions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,7 +10,7 @@ namespace GymManagement.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class SubscriptionsController: ControllerBase
+public class SubscriptionsController : ControllerBase
 {
     private readonly ISender _mediator;
 
@@ -23,13 +26,26 @@ public class SubscriptionsController: ControllerBase
         var command = new CreateSubscriptionCommand(
             request.SubscriptionType.ToString(),
             request.AdminId);
-        
-        Guid subscriptionId = await _mediator.Send(command);
 
-        var response = new SubscriptionResponse(
-            subscriptionId,
-            request.SubscriptionType);
+        ErrorOr<Subscription> createSubscriptionResult = await _mediator.Send(command);
 
-        return Ok(response);
+        return createSubscriptionResult.MatchFirst(
+            subscription => Ok(new SubscriptionResponse(subscription.Id, request.SubscriptionType)),
+            error => Problem());
+    }
+
+    [HttpGet("{subscriptionId:guid}")]
+    public async Task<IActionResult> GetSubscription(Guid subscriptionId)
+    {
+        var query = new GetSubscriptionQuery(subscriptionId);
+
+
+        ErrorOr<Subscription> getSubscriptionResult = await _mediator.Send(query);
+
+        return getSubscriptionResult.MatchFirst(
+            subscription => Ok(new SubscriptionResponse(
+                subscription.Id,
+                Enum.Parse<SubscriptionType>(subscription.SubscriptionType!))),
+            error => Problem());
     }
 }

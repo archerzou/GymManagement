@@ -1,0 +1,4 @@
+@host=http://localhost:5062
+@subscriptionId=f1991452-c1a2-43ae-afd6-c8cbc4b5ad89
+
+DELETE {{host}}/subscriptions/{{subscriptionId}}

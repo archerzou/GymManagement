@@ -10,6 +10,12 @@
     <ProjectReference Include="..\GymManagement.Domain\GymManagement.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Gyms\Commands\DeleteGym\" />
+    <Folder Include="Gyms\Commands\AddTrainer\" />
+    <Folder Include="Gyms\Queries\ListGyms\" />
+  </ItemGroup>
+
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>

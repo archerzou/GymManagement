@@ -25,7 +25,14 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Subscriptions", "Subscriptions", "{428A88E6-7C3E-4154-A030-93F3646F083B}"
 	ProjectSection(SolutionItems) = preProject
 		requests\Subscriptions\CreateSubscription.http = requests\Subscriptions\CreateSubscription.http
+		DeleteSubscription.http = DeleteSubscription.http
 		GetSubscription.http = GetSubscription.http
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gyms", "Gyms", "{2CD81279-FE47-4A7E-A38C-692F0707AFBB}"
+	ProjectSection(SolutionItems) = preProject
+		CreateGym.http = CreateGym.http
+		ListGyms.http = ListGyms.http
 	EndProjectSection
 EndProject
 Global
@@ -109,6 +116,7 @@ Global
 		{F4773E2F-80CC-47B0-BD62-A87F7A7093B3} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{9952ACC2-7203-49DA-B11B-B04842F5B8A3} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{428A88E6-7C3E-4154-A030-93F3646F083B} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{2CD81279-FE47-4A7E-A38C-692F0707AFBB} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {86962154-F2E4-4BC9-B6C3-B8216ED9F571}

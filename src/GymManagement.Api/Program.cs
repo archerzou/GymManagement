@@ -14,6 +14,7 @@ WebApplication app = builder.Build();
 {
     if (app.Environment.IsDevelopment())
     {
+        app.UseDeveloperExceptionPage();
         app.MapOpenApi();
     }
 

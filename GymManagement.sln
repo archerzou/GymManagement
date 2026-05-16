@@ -31,8 +31,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Subscriptions", "Subscripti
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gyms", "Gyms", "{B1D4053D-07D2-4DC6-808F-F99B282B3A28}"
 	ProjectSection(SolutionItems) = preProject
+		AddTrainer.http = AddTrainer.http
 		requests\Gyms\CreateGym.http = requests\Gyms\CreateGym.http
-		requests\Gyms\ListGyms.http = requests\Gyms\ListGyms.http
+		requests\Gyms\GetGymById.http = requests\Gyms\GetGymById.http
+		ListGyms.http = ListGyms.http
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Rooms", "Rooms", "{AB1F79BC-0B59-4ABD-9EA6-48A7A4D0761F}"
+	ProjectSection(SolutionItems) = preProject
+		CreateRoom.http = CreateRoom.http
+		DeleteRoom.http = DeleteRoom.http
 	EndProjectSection
 EndProject
 Global
@@ -117,6 +125,7 @@ Global
 		{9952ACC2-7203-49DA-B11B-B04842F5B8A3} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{CF7B3B2A-AC51-419D-8259-C7D5E332C6C8} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{B1D4053D-07D2-4DC6-808F-F99B282B3A28} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{AB1F79BC-0B59-4ABD-9EA6-48A7A4D0761F} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {86962154-F2E4-4BC9-B6C3-B8216ED9F571}

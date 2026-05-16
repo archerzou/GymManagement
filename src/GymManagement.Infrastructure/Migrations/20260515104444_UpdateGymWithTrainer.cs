@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace GymManagement.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class NewInitialCreate : Migration
+    public partial class UpdateGymWithTrainer : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -34,7 +34,7 @@ namespace GymManagement.Infrastructure.Migrations
                     SubscriptionId = table.Column<Guid>(type: "TEXT", nullable: false),
                     MaxRooms = table.Column<int>(type: "INTEGER", nullable: false),
                     RoomIds = table.Column<string>(type: "TEXT", nullable: false),
-                    TrainerIds = table.Column<string>(type: "TEXT", nullable: true)
+                    TrainerIds = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {

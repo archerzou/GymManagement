@@ -5,6 +5,7 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 {
     builder.Services.AddControllers();
     builder.Services.AddOpenApi();
+    builder.Services.AddProblemDetails();
     builder.Services
         .AddApplication()
         .AddInfrastructure();
@@ -12,6 +13,8 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 WebApplication app = builder.Build();
 {
+    app.UseExceptionHandler();
+
     if (app.Environment.IsDevelopment())
     {
         app.UseDeveloperExceptionPage();

@@ -1,4 +1,5 @@
 @host=http://localhost:5062
-@subscriptionId=5f75d2c3-e250-4a67-9928-342bef69480a
-@gymId=41b09e65-f6c3-4d12-8053-f41cf1d866c6
+@subscriptionId=b17b77c8-bdae-49a4-b177-a9c112c2d6c0
+@gymId=e6d709d5-48fc-4e96-851d-66a8572f42be
 
+GET {{host}}/subscriptions/{{subscriptionId}}/gyms/{{gymId}}

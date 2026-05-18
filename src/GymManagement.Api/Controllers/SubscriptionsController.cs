@@ -8,9 +8,8 @@ using DomainSubscriptionType = GymManagement.Domain.Subscriptions.SubscriptionTy
 
 namespace GymManagement.Api.Controllers;
 
-[ApiController]
 [Route("[controller]")]
-public class SubscriptionsController : ControllerBase
+public class SubscriptionsController : ApiController
 {
     private readonly ISender _mediator;
 
@@ -46,7 +45,7 @@ public class SubscriptionsController : ControllerBase
                 new SubscriptionResponse(
                     subscription.Id,
                     ToDto(subscription.SubscriptionType))),
-            error => Problem());
+            Problem);
     }
 
 
@@ -62,7 +61,7 @@ public class SubscriptionsController : ControllerBase
             subscription => Ok(new SubscriptionResponse(
                 subscription.Id,
                 ToDto(subscription.SubscriptionType))),
-            error => Problem());
+            Problem);
     }
 
     [HttpDelete("{subscriptionId:guid}")]
@@ -74,7 +73,7 @@ public class SubscriptionsController : ControllerBase
 
         return createSubscriptionResult.Match<IActionResult>(
             _ => NoContent(),
-            _ => Problem());
+            Problem);
     }
 
     private static SubscriptionType ToDto(DomainSubscriptionType subscriptionType)

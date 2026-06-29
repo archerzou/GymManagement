@@ -1,9 +1,11 @@
-﻿using GymManagement.Application.Gyms.Commands.AddTrainer;
+﻿using ErrorOr;
+using GymManagement.Application.Gyms.Commands.AddTrainer;
 using GymManagement.Application.Gyms.Commands.CreateGym;
 using GymManagement.Application.Gyms.Commands.DeleteGym;
 using GymManagement.Application.Gyms.Queries.GetGym;
 using GymManagement.Application.Gyms.Queries.ListGyms;
 using GymManagement.Contracts.Gyms;
+using GymManagement.Domain.Gyms;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,7 +26,7 @@ public class GymsController: ApiController
     {
         var command = new GetGymQuery(subscriptionId, gymId);
 
-        var getGymResult = await _mediator.Send(command);
+        ErrorOr<Gym> getGymResult = await _mediator.Send(command);
 
         return getGymResult.Match(
             gym => Ok(new GymResponse(gym.Id, gym.Name)),
@@ -38,7 +40,7 @@ public class GymsController: ApiController
     {
         var command = new CreateGymCommand(request.Name, subscriptionId);
 
-        var createGymResult = await _mediator.Send(command);
+        ErrorOr<Gym> createGymResult = await _mediator.Send(command);
 
         return createGymResult.Match(
             gym => CreatedAtAction(
@@ -53,7 +55,7 @@ public class GymsController: ApiController
     {
         var command = new DeleteGymCommand(subscriptionId, gymId);
 
-        var deleteGymResult = await _mediator.Send(command);
+        ErrorOr<Deleted> deleteGymResult = await _mediator.Send(command);
 
         return deleteGymResult.Match<IActionResult>(
             _ => NoContent(),
@@ -65,7 +67,7 @@ public class GymsController: ApiController
     {
         var command = new ListGymsQuery(subscriptionId);
 
-        var listGymsResult = await _mediator.Send(command);
+        ErrorOr<List<Gym>> listGymsResult = await _mediator.Send(command);
 
         return listGymsResult.Match(
             gyms => Ok(gyms.ConvertAll(gym => new GymResponse(gym.Id, gym.Name))),
@@ -77,7 +79,7 @@ public class GymsController: ApiController
     {
         var command = new AddTrainerCommand(subscriptionId, gymId, request.TrainerId);
 
-        var addTrainerResult = await _mediator.Send(command);
+        ErrorOr<Success> addTrainerResult = await _mediator.Send(command);
 
         return addTrainerResult.MatchFirst<IActionResult>(
             success => Ok(),

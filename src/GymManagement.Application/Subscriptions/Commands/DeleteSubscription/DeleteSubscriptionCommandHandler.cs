@@ -1,5 +1,6 @@
 ﻿using ErrorOr;
 using GymManagement.Application.Common.Interfaces;
+using GymManagement.Domain.Subscriptions;
 using MediatR;
 
 namespace GymManagement.Application.Subscriptions.Commands.DeleteSubscription;
@@ -19,7 +20,7 @@ public class DeleteSubscriptionCommandHandler: IRequestHandler<DeleteSubscriptio
 
     public async Task<ErrorOr<Deleted>> Handle(DeleteSubscriptionCommand command, CancellationToken cancellationToken)
     {
-        var subscription = await _subscriptionsRepository.GetByIdAsync(command.SubscriptionId);
+        Subscription? subscription = await _subscriptionsRepository.GetByIdAsync(command.SubscriptionId);
 
         if (subscription is null)
         {

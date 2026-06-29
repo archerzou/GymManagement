@@ -1,5 +1,6 @@
 ﻿using ErrorOr;
 using GymManagement.Application.Common.Interfaces;
+using GymManagement.Domain.Gyms;
 using MediatR;
 
 namespace GymManagement.Application.Rooms.Commands.DeleteRoom;
@@ -18,7 +19,7 @@ public class DeleteRoomCommandHandler : IRequestHandler<DeleteRoomCommand, Error
 
     public async Task<ErrorOr<Deleted>> Handle(DeleteRoomCommand command, CancellationToken cancellationToken)
     {
-        var gym = await _gymsRepository.GetByIdAsync(command.GymId);
+        Gym? gym = await _gymsRepository.GetByIdAsync(command.GymId);
 
         if (gym is null)
         {

@@ -24,7 +24,7 @@ public class ApiController: ControllerBase
 
     protected IActionResult Problem(Error error)
     {
-        var statusCode = error.Type switch
+        int statusCode = error.Type switch
         {
             ErrorType.Conflict => StatusCodes.Status409Conflict,
             ErrorType.Validation => StatusCodes.Status400BadRequest,
@@ -39,7 +39,7 @@ public class ApiController: ControllerBase
     {
         var modelStateDictionary = new ModelStateDictionary();
 
-        foreach (var error in errors)
+        foreach (Error error in errors)
         {
             modelStateDictionary.AddModelError(
                 error.Code,

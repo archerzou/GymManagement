@@ -1,9 +1,11 @@
-﻿using GymManagement.Application.Subscriptions.Commands.CreateSubscription;
+﻿using ErrorOr;
+using GymManagement.Application.Subscriptions.Commands.CreateSubscription;
 using GymManagement.Application.Subscriptions.Commands.DeleteSubscription;
 using GymManagement.Application.Subscriptions.Queries.GetSubscription;
 using GymManagement.Contracts.Subscriptions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using DomainSubscription = GymManagement.Domain.Subscriptions.Subscription;
 using DomainSubscriptionType = GymManagement.Domain.Subscriptions.SubscriptionType;
 
 namespace GymManagement.Api.Controllers;
@@ -25,7 +27,7 @@ public class SubscriptionsController : ApiController
 
         if (!DomainSubscriptionType.TryFromName(
                 request.SubscriptionType.ToString(),
-                out var subscriptionType))
+                out DomainSubscriptionType? subscriptionType))
         {
             return Problem(
                 statusCode: StatusCodes.Status400BadRequest,
@@ -36,7 +38,7 @@ public class SubscriptionsController : ApiController
             subscriptionType,
             request.AdminId);
 
-       var createSubscriptionResult = await _mediator.Send(command);
+       ErrorOr<DomainSubscription> createSubscriptionResult = await _mediator.Send(command);
 
         return createSubscriptionResult.MatchFirst(
             subscription => CreatedAtAction(
@@ -55,7 +57,7 @@ public class SubscriptionsController : ApiController
         var query = new GetSubscriptionQuery(subscriptionId);
 
 
-        var getSubscriptionsResult = await _mediator.Send(query);
+        ErrorOr<DomainSubscription> getSubscriptionsResult = await _mediator.Send(query);
 
         return getSubscriptionsResult.MatchFirst(
             subscription => Ok(new SubscriptionResponse(
@@ -69,7 +71,7 @@ public class SubscriptionsController : ApiController
     {
         var command = new DeleteSubscriptionCommand(subscriptionId);
 
-        var createSubscriptionResult = await _mediator.Send(command);
+        ErrorOr<Deleted> createSubscriptionResult = await _mediator.Send(command);
 
         return createSubscriptionResult.Match<IActionResult>(
             _ => NoContent(),

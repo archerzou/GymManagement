@@ -1,6 +1,8 @@
 ﻿using ErrorOr;
 using GymManagement.Application.Common.Interfaces;
+using GymManagement.Domain.Gyms;
 using GymManagement.Domain.Rooms;
+using GymManagement.Domain.Subscriptions;
 using MediatR;
 
 namespace GymManagement.Application.Rooms.Commands.CreateRoom;
@@ -22,14 +24,14 @@ public class CreateRoomCommandHandler : IRequestHandler<CreateRoomCommand, Error
 
     public async Task<ErrorOr<Room>> Handle(CreateRoomCommand command, CancellationToken cancellationToken)
     {
-        var gym = await _gymsRepository.GetByIdAsync(command.GymId);
+        Gym? gym = await _gymsRepository.GetByIdAsync(command.GymId);
 
         if (gym is null)
         {
             return Error.NotFound(description: "Gym not found");
         }
 
-        var subscription = await _subscriptionsRepository.GetByIdAsync(gym.SubscriptionId);
+        Subscription? subscription = await _subscriptionsRepository.GetByIdAsync(gym.SubscriptionId);
 
         if (subscription is null)
         {
@@ -41,7 +43,7 @@ public class CreateRoomCommandHandler : IRequestHandler<CreateRoomCommand, Error
             gymId: gym.Id,
             maxDailySessions: subscription.GetMaxDailySessions());
 
-        var addGymResult = gym.AddRoom(room);
+        ErrorOr<Success> addGymResult = gym.AddRoom(room);
 
         if (addGymResult.IsError)
         {

@@ -1,6 +1,8 @@
-﻿using GymManagement.Application.Rooms.Commands.CreateRoom;
+﻿using ErrorOr;
+using GymManagement.Application.Rooms.Commands.CreateRoom;
 using GymManagement.Application.Rooms.Commands.DeleteRoom;
 using GymManagement.Contracts.Rooms;
+using GymManagement.Domain.Rooms;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,7 +27,7 @@ public class RoomsController : ApiController
             gymId,
             request.Name);
 
-        var createRoomResult = await _mediator.Send(command);
+        ErrorOr<Room> createRoomResult = await _mediator.Send(command);
 
         return createRoomResult.Match(
             room => Created(
@@ -41,7 +43,7 @@ public class RoomsController : ApiController
     {
         var command = new DeleteRoomCommand(gymId, roomId);
 
-        var deleteRoomResult = await _mediator.Send(command);
+        ErrorOr<Deleted> deleteRoomResult = await _mediator.Send(command);
 
         return deleteRoomResult.Match<IActionResult>(
             _ => NoContent(),

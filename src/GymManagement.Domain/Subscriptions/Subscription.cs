@@ -8,7 +8,7 @@ public class Subscription
     private readonly List<Guid> _gymIds = new();
     private readonly int _maxGyms;
     public Guid Id { get; private set; }
-    public SubscriptionType? SubscriptionType { get; private set; } = null;
+    public SubscriptionType SubscriptionType { get; private set; } = null!;
 
     public Guid AdminId { get; }
 

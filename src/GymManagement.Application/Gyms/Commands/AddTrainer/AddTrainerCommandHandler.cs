@@ -26,7 +26,7 @@ public class AddTrainerCommandHandler : IRequestHandler<AddTrainerCommand, Error
             return Error.NotFound(description: "Gym not found");
         }
 
-        var addTrainerResult = gym.AddTrainer(command.TrainerId);
+        ErrorOr<Success> addTrainerResult = gym.AddTrainer(command.TrainerId);
 
         if (addTrainerResult.IsError)
         {

@@ -32,17 +32,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Subscriptions", "Subscripti
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gyms", "Gyms", "{B1D4053D-07D2-4DC6-808F-F99B282B3A28}"
 	ProjectSection(SolutionItems) = preProject
-		AddTrainer.http = AddTrainer.http
 		requests\Gyms\CreateGym.http = requests\Gyms\CreateGym.http
 		requests\Gyms\GetGymById.http = requests\Gyms\GetGymById.http
-		ListGyms.http = ListGyms.http
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Rooms", "Rooms", "{AB1F79BC-0B59-4ABD-9EA6-48A7A4D0761F}"
-	ProjectSection(SolutionItems) = preProject
-		CreateRoom.http = CreateRoom.http
-		DeleteRoom.http = DeleteRoom.http
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

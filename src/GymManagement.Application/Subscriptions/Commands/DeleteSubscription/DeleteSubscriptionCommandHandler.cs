@@ -1,36 +1,39 @@
 ﻿using ErrorOr;
 using GymManagement.Application.Common.Interfaces;
+using GymManagement.Domain.Admins;
 using GymManagement.Domain.Subscriptions;
 using MediatR;
 
 namespace GymManagement.Application.Subscriptions.Commands.DeleteSubscription;
-public class DeleteSubscriptionCommandHandler: IRequestHandler<DeleteSubscriptionCommand, ErrorOr<Deleted>>
+
+public class DeleteSubscriptionCommandHandler(
+    IAdminsRepository adminsRepository,
+    ISubscriptionsRepository subscriptionsRepository,
+    IUnitOfWork unitOfWork)
+    : IRequestHandler<DeleteSubscriptionCommand, ErrorOr<Deleted>>
 {
-    private readonly ISubscriptionsRepository _subscriptionsRepository;
-    private readonly IUnitOfWork _unitOfWork;
-
-    public DeleteSubscriptionCommandHandler(
-        ISubscriptionsRepository subscriptionsRepository,
-        IUnitOfWork unitOfWork
-        )
-    {
-        _subscriptionsRepository = subscriptionsRepository;
-        _unitOfWork = unitOfWork;
-    }
-
     public async Task<ErrorOr<Deleted>> Handle(DeleteSubscriptionCommand command, CancellationToken cancellationToken)
     {
-        Subscription? subscription = await _subscriptionsRepository.GetByIdAsync(command.SubscriptionId);
+        Subscription? subscription = await subscriptionsRepository.GetByIdAsync(command.SubscriptionId);
 
         if (subscription is null)
         {
             return Error.NotFound(description: "Subscription not found");
         }
 
-        await _subscriptionsRepository.RemoveSubscriptionAsync(subscription);
+        Admin? admin = await adminsRepository.GetByIdAsync(subscription.AdminId);
 
-        await _unitOfWork.CommitChangesAsync();
+        if (admin is null)
+        {
+            return Error.Unexpected(description: "Admin not found");
+        }
+
+        admin.DeleteSubscription(command.SubscriptionId);
+
+        await adminsRepository.UpdateAsync(admin);
+        await unitOfWork.CommitChangesAsync();
 
         return Result.Deleted;
     }
 }
+

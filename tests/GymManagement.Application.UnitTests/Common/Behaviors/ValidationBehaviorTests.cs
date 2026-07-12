@@ -33,8 +33,8 @@ public class ValidationBehaviorTests
     public async Task InvokeBehavior_WhenValidatorResultIsValid_ShouldInvokeNextBehavior()
     {
         // Arrange
-        var createGymRequest = GymCommandFactory.CreateCreateGymCommand();
-        var gym = GymFactory.CreateGym();
+        CreateGymCommand createGymRequest = GymCommandFactory.CreateCreateGymCommand();
+        Gym gym = GymFactory.CreateGym();
 
         _mockValidator
             .ValidateAsync(createGymRequest, Arg.Any<CancellationToken>())
@@ -43,7 +43,7 @@ public class ValidationBehaviorTests
         _mockNextBehavior.Invoke().Returns(gym);
 
         // Act
-        var result = await _validationBehavior.Handle(createGymRequest, _mockNextBehavior, default);
+        ErrorOr<Gym> result = await _validationBehavior.Handle(createGymRequest, _mockNextBehavior, default);
 
         // Assert
         result.IsError.Should().BeFalse();
@@ -54,7 +54,7 @@ public class ValidationBehaviorTests
     public async Task InvokeBehavior_WhenValidatorResultIsNotValid_ShouldReturnListOfErrors()
     {
         // Arrange
-        var createGymRequest = GymCommandFactory.CreateCreateGymCommand();
+        CreateGymCommand createGymRequest = GymCommandFactory.CreateCreateGymCommand();
         List<ValidationFailure> validationFailures = [new(propertyName: "foo", errorMessage: "bad foo")];
 
         _mockValidator
@@ -62,7 +62,7 @@ public class ValidationBehaviorTests
             .Returns(new ValidationResult(validationFailures));
 
         // Act
-        var result = await _validationBehavior.Handle(createGymRequest, _mockNextBehavior, default);
+        ErrorOr<Gym> result = await _validationBehavior.Handle(createGymRequest, _mockNextBehavior, default);
 
         // Assert
         result.IsError.Should().BeTrue();

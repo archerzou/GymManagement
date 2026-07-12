@@ -30,7 +30,7 @@ public class Subscription
 
         if (_gymIds.Count >= _maxGyms)
         {
-            return SubscriptionErrors.CannotHaveMoreGymsThanSubscriptionAllows;
+            return SubscriptionErrors.CannotHaveMoreGymsThanTheSubscriptionAllows;
         }
 
         _gymIds.Add(gym.Id);

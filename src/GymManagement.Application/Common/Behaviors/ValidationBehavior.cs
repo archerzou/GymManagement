@@ -5,7 +5,7 @@ using MediatR;
 
 namespace GymManagement.Application.Common.Behaviors;
 
-public class ValidationBehavior<TRequest, TResponse>(IValidator<TRequest> validator)
+public class ValidationBehavior<TRequest, TResponse>(IValidator<TRequest>? validator = null)
     : IPipelineBehavior<TRequest, TResponse>
     where TRequest : IRequest<TResponse>
     where TResponse : IErrorOr
@@ -15,6 +15,11 @@ public class ValidationBehavior<TRequest, TResponse>(IValidator<TRequest> valida
         RequestHandlerDelegate<TResponse> next,
         CancellationToken cancellationToken)
     {
+        if (validator is null)
+        {
+            return await next();
+        }
+
         ValidationResult? validationResult = await validator.ValidateAsync(request, cancellationToken);
 
         if (validationResult.IsValid)

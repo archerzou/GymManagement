@@ -1,16 +1,13 @@
+using GymManagement.Api;
 using GymManagement.Application;
 using GymManagement.Infrastructure;
-using GymManagement.Infrastructure.Common.Middleware;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 {
-    builder.Services.AddControllers();
-    builder.Services.AddOpenApi();
-    builder.Services.AddProblemDetails();
-    builder.Services.AddHttpContextAccessor();
     builder.Services
+        .AddPresentation()
         .AddApplication()
-        .AddInfrastructure();
+        .AddInfrastructure(builder.Configuration);
 }
 
 WebApplication app = builder.Build();

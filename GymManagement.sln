@@ -54,6 +54,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GymManagement.Application.S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GymManagement.Api.IntegrationTests", "tests\GymManagement.Api.IntegrationTests\GymManagement.Api.IntegrationTests.csproj", "{F0E01E40-A76F-459E-A6A3-A9FB2E1D9484}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Authentication", "Authentication", "{EDF770A1-DBBE-4084-BD4E-A38BF647E0BF}"
+	ProjectSection(SolutionItems) = preProject
+		requests\Authentication\Login.http = requests\Authentication\Login.http
+		requests\Authentication\Register.http = requests\Authentication\Register.http
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Profiles", "Profiles", "{5EB27925-5D6F-4AB7-8556-57181536D821}"
+	ProjectSection(SolutionItems) = preProject
+		requests\Profiles\CreateProfile.http = requests\Profiles\CreateProfile.http
+		requests\Profiles\ListProfiles.http = requests\Profiles\ListProfiles.http
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -202,6 +214,8 @@ Global
 		{F32E301E-10B4-4393-A2C1-4BBDFB2A9BAF} = {EDB7D6DF-05D0-4133-894C-3A6CC83FC4F8}
 		{B6AA52C0-C8A9-4C85-AAEB-399E03090447} = {EDB7D6DF-05D0-4133-894C-3A6CC83FC4F8}
 		{F0E01E40-A76F-459E-A6A3-A9FB2E1D9484} = {EDB7D6DF-05D0-4133-894C-3A6CC83FC4F8}
+		{EDF770A1-DBBE-4084-BD4E-A38BF647E0BF} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{5EB27925-5D6F-4AB7-8556-57181536D821} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {86962154-F2E4-4BC9-B6C3-B8216ED9F571}

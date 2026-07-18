@@ -28,7 +28,7 @@ public class SqliteTestDatabase : IDisposable
     public void InitializeDatabase()
     {
         Connection.Open();
-        var options = new DbContextOptionsBuilder<GymManagementDbContext>()
+        DbContextOptions<GymManagementDbContext> options = new DbContextOptionsBuilder<GymManagementDbContext>()
             .UseSqlite(Connection)
             .Options;
 
